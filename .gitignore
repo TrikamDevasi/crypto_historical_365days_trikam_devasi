@@ -40,9 +40,6 @@ bower_components
 # node-gyp compilation folder (https://github.com/nodejs/node-gyp)
 build/Release
 
-# Dependency directories for noble-device-manager
-components
-
 # Optional npm cache directory
 .npm
 
