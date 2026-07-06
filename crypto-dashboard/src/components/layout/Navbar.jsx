@@ -91,49 +91,50 @@ const Navbar = () => {
 
         {/* Profile Dropdown */}
         {user && (
-          <div className="relative" ref={dropdownRef}>
-            <button
-              onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center gap-2 pl-2 pr-1 py-1 rounded-full bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-colors text-white/70 hover:text-white text-xs font-sans font-medium"
-            >
-              <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-primary to-accent flex items-center justify-center text-white font-bold text-xxs">
-                {user?.name?.charAt(0).toUpperCase()}
-              </div>
-              <span className="hidden sm:inline-block max-w-[100px] truncate">{user?.name}</span>
-              <KeyboardArrowDownIcon className={`w-4 h-4 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
-            </button>
+          <div className="flex items-center gap-2">
+            <div className="relative" ref={dropdownRef}>
+              <button
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                className="flex items-center gap-2 pl-2 pr-1 py-1 rounded-full bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-colors text-white/70 hover:text-white text-xs font-sans font-medium"
+              >
+                <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-primary to-accent flex items-center justify-center text-white font-bold text-xxs">
+                  {user?.name?.charAt(0).toUpperCase()}
+                </div>
+                <span className="hidden sm:inline-block max-w-[100px] truncate">{user?.name}</span>
+                <KeyboardArrowDownIcon className={`w-4 h-4 transition-transform duration-200 ${dropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
 
-            {dropdownOpen && (
-              <div className="absolute right-0 mt-2 w-48 rounded-2xl bg-bg-secondary/95 backdrop-blur-xl border border-white/10 p-1.5 shadow-neon-primary/10 shadow-lg text-xs space-y-1 z-50">
-                <Link
-                  to="/profile"
-                  onClick={() => setDropdownOpen(false)}
-                  className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-white/70 hover:text-white hover:bg-white/5 transition-colors"
-                >
-                  <PersonIcon className="w-4 h-4 text-primary" />
-                  <span>My Profile</span>
-                </Link>
-                <Link
-                  to="/settings"
-                  onClick={() => setDropdownOpen(false)}
-                  className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-white/70 hover:text-white hover:bg-white/5 transition-colors"
-                >
-                  <SettingsIcon className="w-4 h-4 text-primary" />
-                  <span>Settings</span>
-                </Link>
-                <hr className="border-white/5 my-1" />
-                <button
-                  onClick={() => {
-                    setDropdownOpen(false);
-                    handleLogoutClick();
-                  }}
-                  className="w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-accent-red hover:bg-accent-red/10 transition-colors text-left"
-                >
-                  <LogoutIcon className="w-4 h-4" />
-                  <span>Logout</span>
-                </button>
-              </div>
-            )}
+              {dropdownOpen && (
+                <div className="absolute right-0 mt-2 w-48 rounded-2xl bg-bg-secondary/95 backdrop-blur-xl border border-white/10 p-1.5 shadow-neon-primary/10 shadow-lg text-xs space-y-1 z-50">
+                  <Link
+                    to="/profile"
+                    onClick={() => setDropdownOpen(false)}
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-white/70 hover:text-white hover:bg-white/5 transition-colors"
+                  >
+                    <PersonIcon className="w-4 h-4 text-primary" />
+                    <span>My Profile</span>
+                  </Link>
+                  <Link
+                    to="/settings"
+                    onClick={() => setDropdownOpen(false)}
+                    className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-white/70 hover:text-white hover:bg-white/5 transition-colors"
+                  >
+                    <SettingsIcon className="w-4 h-4 text-primary" />
+                    <span>Settings</span>
+                  </Link>
+                </div>
+              )}
+            </div>
+
+            {/* Explicit Logout Button */}
+            <button
+              onClick={handleLogoutClick}
+              className="flex items-center gap-2 ml-1 px-3 py-1.5 rounded-full bg-accent-red/10 border border-accent-red/20 hover:bg-accent-red/20 text-accent-red hover:shadow-neon-red/30 transition-all text-xs font-semibold"
+              title="Logout"
+            >
+              <LogoutIcon className="w-4 h-4" />
+              <span className="hidden sm:inline-block">Log Out</span>
+            </button>
           </div>
         )}
       </div>
