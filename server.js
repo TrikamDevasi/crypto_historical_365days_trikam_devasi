@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const path = require('path');
 const cors = require('cors');
 const connectDB = require('./config/db');
 const logger = require('./middlewares/logger');
@@ -50,13 +51,22 @@ protectedRouter.patch('/coins/:id', protect, coinController.updateCoin);
 protectedRouter.delete('/coins/:id', protect, coinController.deleteCoin);
 app.use('/api/v1/protected', protectedRouter);
 
-// Base route info
-app.get('/', (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: 'Welcome to the Crypto Market Analytics API. Reference /api/v1 for endpoints.'
+// Serve frontend static files in production
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, 'crypto-dashboard/dist')));
+  
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'crypto-dashboard', 'dist', 'index.html'));
   });
-});
+} else {
+  // Base route info for development
+  app.get('/', (req, res) => {
+    res.status(200).json({
+      success: true,
+      message: 'Welcome to the Crypto Market Analytics API. Reference /api/v1 for endpoints.'
+    });
+  });
+}
 
 // Favicon handler to avoid browser 404 errors
 app.get('/favicon.ico', (req, res) => res.status(204).end());

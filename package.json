@@ -7,6 +7,7 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm run dev --prefix crypto-dashboard",
+    "build": "npm install --prefix crypto-dashboard && npm run build --prefix crypto-dashboard",
     "dev": "node scripts/dev.js",
     "seed": "node scripts/seed.js"
   },
