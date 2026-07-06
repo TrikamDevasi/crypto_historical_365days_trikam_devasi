@@ -18,18 +18,18 @@ const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#FF2E63', // Dark mode primary Cyber Pink
+      main: '#0070F3',
     },
     secondary: {
-      main: '#FF8C00', // Accent Amber
+      main: '#10B981',
     },
     background: {
-      default: '#0B0E14',
-      paper: '#151A23',
+      default: '#000000',
+      paper: '#0A0A0A',
     },
     text: {
-      primary: '#f0f0fa',
-      secondary: '#9CA3AF',
+      primary: '#EDEDED',
+      secondary: '#888888',
     },
   },
   typography: {

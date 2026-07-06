@@ -4,39 +4,39 @@
 
 @layer base {
   :root {
-    --color-primary: #FF2E63;
-    --color-primary-hover: #E91E63;
-    --color-primary-light: #FFD9E2;
-    --color-accent: #FF8C00;
+    --color-primary: #0070F3;
+    --color-primary-hover: #3291FF;
+    --color-primary-light: rgba(0, 112, 243, 0.15);
+    --color-accent: #0070F3;
     
     /* Light Mode Neutrals */
-    --color-bg-primary: #F0F4F8;
+    --color-bg-primary: #FAFAFA;
     --color-bg-secondary: #FFFFFF;
     --color-bg-tertiary: #FFFFFF;
     
-    --color-text-main: #0B0E14;
-    --color-text-muted: #4A5568;
+    --color-text-main: #111111;
+    --color-text-muted: #666666;
     
-    --color-border: #FFD9E2;
-    --color-border-em: #FFB3C6;
+    --color-border: #EAEAEA;
+    --color-border-em: #CCCCCC;
   }
 
   .dark {
-    /* Dark Mode Defaults */
-    --color-primary: #FF2E63;
-    --color-primary-hover: #FF4C79;
-    --color-primary-light: rgba(255, 46, 99, 0.15);
-    --color-accent: #FF8C00;
+    /* Dark Mode Defaults (Vercel Style) */
+    --color-primary: #0070F3;
+    --color-primary-hover: #3291FF;
+    --color-primary-light: rgba(0, 112, 243, 0.15);
+    --color-accent: #0070F3;
     
-    --color-bg-primary: #0B0E14;
-    --color-bg-secondary: #151A23;
-    --color-bg-tertiary: #151A23;
+    --color-bg-primary: #000000;
+    --color-bg-secondary: #0A0A0A;
+    --color-bg-tertiary: #0A0A0A;
     
-    --color-text-main: #f0f0fa;
-    --color-text-muted: #9CA3AF; /* Muted gray for dark mode */
+    --color-text-main: #EDEDED;
+    --color-text-muted: #888888;
     
-    --color-border: rgba(255, 46, 99, 0.1);
-    --color-border-em: rgba(255, 46, 99, 0.25);
+    --color-border: #333333;
+    --color-border-em: #444444;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -55,55 +55,50 @@
   }
 }
 
-/* Subtle dot grid */
+/* Minimal dot grid */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   background-image: radial-gradient(
     circle, 
-    var(--color-primary-light) 1px, 
+    var(--color-border) 1px, 
     transparent 1px
   );
-  background-size: 28px 28px;
+  background-size: 32px 32px;
+  opacity: 0.5;
   pointer-events: none;
   z-index: 0;
 }
 
 @layer components {
-  /* === GLASS CARD === */
+  /* === CARDS === */
   .glass {
-    @apply bg-bg-tertiary border border-border-color rounded-2xl transition-all duration-200;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    @apply bg-bg-secondary border border-border-color rounded-xl transition-all duration-200;
   }
   .glass:hover {
     @apply border-border-em;
-    box-shadow: 0 4px 20px rgba(255, 46, 99, 0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
   }
 
   .glass-panel {
-    @apply bg-bg-secondary border border-border-color rounded-2xl;
-    backdrop-filter: blur(12px);
+    @apply bg-bg-secondary border border-border-color rounded-xl;
   }
 
   /* === BUTTONS === */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 text-white font-sans text-sm font-medium px-5 py-2.5 rounded-xl border-none cursor-pointer transition-all duration-200;
-    background: linear-gradient(to bottom right, var(--color-primary), var(--color-accent));
-    box-shadow: 0 4px 14px rgba(255, 46, 99, 0.25);
+    @apply inline-flex items-center justify-center gap-2 text-white font-sans text-sm font-medium px-4 py-2 rounded-lg border border-transparent cursor-pointer transition-all duration-200;
+    background-color: var(--color-primary);
   }
   .btn-primary:hover {
-    @apply scale-[1.02];
-    background: linear-gradient(to bottom right, var(--color-primary-hover), var(--color-primary));
-    box-shadow: 0 6px 20px rgba(255, 46, 99, 0.35);
+    background-color: var(--color-primary-hover);
   }
   .btn-primary:active {
-    @apply scale-100;
+    @apply scale-[0.98];
   }
   
   .btn-outline {
-    @apply inline-flex items-center justify-center gap-2 bg-transparent text-text-muted font-sans text-sm font-normal px-4 py-2.5 rounded-xl border border-border-color cursor-pointer transition-all duration-200;
+    @apply inline-flex items-center justify-center gap-2 bg-transparent text-text-main font-sans text-sm font-medium px-4 py-2 rounded-lg border border-border-color cursor-pointer transition-all duration-200;
   }
   .btn-outline:hover {
     border-color: var(--color-primary);
@@ -113,11 +108,11 @@ body::before {
 
   /* === INPUTS === */
   .input-field {
-    @apply w-full bg-bg-secondary border border-border-color rounded-xl text-text-main font-sans text-sm px-4 py-3 outline-none transition-all duration-200;
+    @apply w-full bg-bg-primary border border-border-color rounded-lg text-text-main font-sans text-sm px-3 py-2 outline-none transition-all duration-200;
   }
   .input-field:focus {
     border-color: var(--color-primary);
-    box-shadow: 0 0 0 3px rgba(255, 46, 99, 0.2);
+    box-shadow: 0 0 0 1px var(--color-primary);
   }
 }
 

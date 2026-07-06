@@ -9,7 +9,6 @@ import Table from '../../components/common/Table';
 import Badge from '../../components/common/Badge';
 import Loader from '../../components/common/Loader';
 import ErrorState from '../../components/common/ErrorState';
-import CryptoGlobe from '../../components/3d/CryptoGlobe';
 import { formatCurrency, formatPercent, formatCompactNumber } from '../../utils/formatters';
 
 // MUI Icons
@@ -129,13 +128,12 @@ const Dashboard = () => {
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Upper Metrics Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 animate-fade-up" style={{ animationDelay: '0.1s' }}>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-fade-up" style={{ animationDelay: '0.1s' }}>
         <StatsCard
           title="Total Market Cap"
           value={marketCap?.totalMarketCap || 1240000000}
           prefix="$"
           icon={PublicIcon}
-          color="cyan"
           trend="up"
           trendValue="+4.2%"
           sparklineData={mockSparkline}
@@ -145,7 +143,6 @@ const Dashboard = () => {
           value={marketCap?.averagePrice || 4850.5}
           prefix="$"
           icon={MonetizationOnIcon}
-          color="purple"
           trend="up"
           trendValue="+1.8%"
           decimals={2}
@@ -155,7 +152,6 @@ const Dashboard = () => {
           title="Monitored Tokens"
           value={coinCount?.totalCoins || coins?.length || 18}
           icon={LayersIcon}
-          color="gold"
           trend="up"
           trendValue="+2 new"
           sparklineData={mockSparkline}
@@ -165,7 +161,6 @@ const Dashboard = () => {
           value={marketCap?.averageVolatility * 100 || 3.4}
           suffix="%"
           icon={ShowChartIcon}
-          color="red"
           trend="down"
           trendValue="-0.4%"
           decimals={2}
@@ -173,19 +168,35 @@ const Dashboard = () => {
         />
       </div>
 
-      {/* Main Row: 3D Globe Globe and Performance Chart */}
+      {/* Main Row: Top Movers and Performance Chart */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 animate-fade-up" style={{ animationDelay: '0.2s' }}>
-        {/* Globe Column */}
-        <div className="lg:col-span-4 glass-panel p-6 flex flex-col items-center justify-center relative overflow-hidden h-[360px] group">
-          <div className="absolute top-4 left-4 z-10">
-            <h3 className="font-heading font-bold text-sm text-white">Global Nodes</h3>
-            <p className="text-xxs text-white/40">Market network operations</p>
+        {/* Top Movers Column */}
+        <div className="lg:col-span-4 glass-panel p-5 flex flex-col h-[360px]">
+          <div className="mb-4">
+            <h3 className="text-[12px] font-semibold text-[#888888] uppercase tracking-widest font-sans">Top Movers</h3>
+            <p className="text-xs text-[#666666] font-sans mt-0.5">Highest 24h volume assets</p>
           </div>
-          <CryptoGlobe size={200} />
-          <div className="text-center mt-3 z-10">
-            <span className="text-xxs bg-primary/15 text-primary border border-primary/20 px-2 py-0.5 rounded-full font-mono">
-              Live Feed Connected
-            </span>
+          
+          <div className="flex-1 overflow-y-auto space-y-3 pr-2 custom-scrollbar">
+            {coins?.slice(0, 5).map((coin) => (
+              <div key={coin._id} className="flex items-center justify-between p-3 rounded-lg border border-[#333333] hover:bg-[#111111] transition-colors cursor-pointer" onClick={() => handleRowClick(coin)}>
+                <div className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-full bg-[#111111] border border-[#333333] flex items-center justify-center font-bold text-xs font-mono text-white">
+                    {coin.symbol?.toUpperCase().substring(0, 3)}
+                  </div>
+                  <div>
+                    <div className="font-semibold text-white text-sm">{coin.name}</div>
+                    <div className="text-xs text-[#888888] uppercase">{coin.symbol}</div>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className="font-mono text-sm text-white">{formatCurrency(coin.price, 2)}</div>
+                  <div className={`text-xs font-mono font-medium ${coin.return_24h >= 0 ? 'text-[#10B981]' : 'text-[#EF4444]'}`}>
+                    {coin.return_24h >= 0 ? '+' : ''}{formatPercent(coin.return_24h)}
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -193,19 +204,19 @@ const Dashboard = () => {
         <div className="lg:col-span-8 glass-panel p-6 h-[360px] flex flex-col justify-between">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h3 className="font-heading font-bold text-sm text-white font-sans">Market Aggregate Price</h3>
-              <p className="text-xxs text-white/40 font-sans">7-day moving average index</p>
+              <h3 className="text-[12px] font-semibold text-[#888888] uppercase tracking-widest font-sans">Market Aggregate Price</h3>
+              <p className="text-xs text-[#666666] font-sans mt-0.5">7-day moving average index</p>
             </div>
-            <div className="flex items-center gap-1.5 bg-white/5 p-1 rounded-lg border border-white/5">
-              <button className="text-xxs px-2.5 py-1 rounded bg-primary/20 text-primary border border-primary/30 font-semibold font-sans">7D</button>
-              <button className="text-xxs px-2.5 py-1 rounded text-white/50 hover:text-white font-medium font-sans">30D</button>
+            <div className="flex items-center gap-1.5 bg-[#000000] p-1 rounded-lg border border-[#333333]">
+              <button className="text-xs px-3 py-1.5 rounded-md bg-[#333333] text-white font-medium font-sans transition-colors">7D</button>
+              <button className="text-xs px-3 py-1.5 rounded-md text-[#888888] hover:text-white font-medium font-sans transition-colors">30D</button>
             </div>
           </div>
           <div className="flex-1 min-h-[220px]">
             <LineChart
               data={chartData}
-              color="#00d4ff"
-              gradientColors={['#00d4ff', 'rgba(0, 212, 255, 0)']}
+              color="#0070F3"
+              gradientColors={['#0070F3', 'rgba(0, 112, 243, 0)']}
               valueFormatter={(v) => `$${formatCompactNumber(v)}`}
               height={220}
             />
@@ -217,8 +228,8 @@ const Dashboard = () => {
       <div className="glass-panel p-6 space-y-4 animate-fade-up" style={{ animationDelay: '0.3s' }}>
         <div className="flex items-center justify-between">
           <div>
-            <h3 className="font-heading font-bold text-sm text-white">Monitored Assets</h3>
-            <p className="text-xxs text-white/40">Real-time ledger entries</p>
+            <h3 className="text-[12px] font-semibold text-[#888888] uppercase tracking-widest font-sans">Monitored Assets</h3>
+            <p className="text-xs text-[#666666] font-sans mt-0.5">Real-time ledger entries</p>
           </div>
           <div className="flex gap-2">
             <Button
