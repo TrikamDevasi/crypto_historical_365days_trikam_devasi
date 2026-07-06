@@ -75,9 +75,9 @@ export default {
           'to': { opacity: '1' },
         },
         pulseRing: {
-          '0%': { boxShadow: '0 0 0 0 rgba(0, 240, 255, 0.3)' },
-          '70%': { boxShadow: '0 0 0 10px rgba(0, 240, 255, 0)' },
-          '100%': { boxShadow: '0 0 0 0 rgba(0, 240, 255, 0)' },
+          '0%': { boxShadow: '0 0 0 0 rgba(255, 46, 99, 0.3)' },
+          '70%': { boxShadow: '0 0 0 10px rgba(255, 46, 99, 0)' },
+          '100%': { boxShadow: '0 0 0 0 rgba(255, 46, 99, 0)' },
         },
       },
       backdropBlur: {

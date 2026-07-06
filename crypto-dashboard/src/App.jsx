@@ -18,10 +18,10 @@ const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#00F0FF', // Dark mode primary cyan
+      main: '#FF2E63', // Dark mode primary Cyber Pink
     },
     secondary: {
-      main: '#8A2BE2', // Accent indigo
+      main: '#FF8C00', // Accent Amber
     },
     background: {
       default: '#0B0E14',
