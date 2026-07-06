@@ -73,10 +73,20 @@ export const fetchVolatilityDistribution = createAsyncThunk('stats/volatilityDis
   }
 });
 
+export const fetchDailyAnalysis = createAsyncThunk('stats/dailyAnalysis', async (_, { rejectWithValue }) => {
+  try {
+    const response = await statsService.getDailyAnalysis();
+    return response.data.data;
+  } catch (error) {
+    return rejectWithValue(error.response?.data?.message || 'Failed');
+  }
+});
+
 const initialState = {
   marketCap: null,
   coinCount: null,
   marketSummary: null,
+  dailyAnalysis: [],
   monthlyAnalysis: [],
   yearlyAnalysis: [],
   rankDistribution: [],
@@ -99,6 +109,7 @@ const statsSlice = createSlice({
       .addCase(fetchMarketCap.rejected, (state, action) => { state.isLoading = false; state.error = action.payload; })
       .addCase(fetchCoinCount.fulfilled, (state, action) => { state.coinCount = action.payload; })
       .addCase(fetchMarketSummary.fulfilled, (state, action) => { state.marketSummary = action.payload; })
+      .addCase(fetchDailyAnalysis.fulfilled, (state, action) => { state.dailyAnalysis = action.payload || []; })
       .addCase(fetchMonthlyAnalysis.fulfilled, (state, action) => { state.monthlyAnalysis = action.payload || []; })
       .addCase(fetchYearlyAnalysis.fulfilled, (state, action) => { state.yearlyAnalysis = action.payload || []; })
       .addCase(fetchRankDistribution.fulfilled, (state, action) => { state.rankDistribution = action.payload || []; })

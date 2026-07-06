@@ -91,7 +91,7 @@ const AdminDashboard = () => {
     <div className="space-y-6">
       {/* Section Title */}
       <div className="flex items-center gap-2">
-        <ShieldIcon className="text-accent-purple w-6 h-6 shadow-neon-purple/20" />
+        <ShieldIcon className="text-accent w-6 h-6 shadow-neon-primary/20" />
         <div>
           <h2 className="font-heading font-bold text-lg text-white">System Admin Console</h2>
           <p className="text-xxs text-white/40">Secure network operations and server parameters</p>
@@ -99,9 +99,9 @@ const AdminDashboard = () => {
       </div>
 
       {/* Metrics Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <Card className="p-5 flex items-center gap-4">
-          <div className="p-3 rounded-xl bg-accent-purple/10 border border-accent-purple/20 text-accent-purple">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <Card className="p-6 flex items-center gap-4">
+          <div className="p-3 rounded-xl bg-accent/10 border border-accent/20 text-accent">
             <PeopleIcon />
           </div>
           <div>
@@ -110,8 +110,8 @@ const AdminDashboard = () => {
           </div>
         </Card>
 
-        <Card className="p-5 flex items-center gap-4">
-          <div className="p-3 rounded-xl bg-accent-cyan/10 border border-accent-cyan/20 text-accent-cyan">
+        <Card className="p-6 flex items-center gap-4">
+          <div className="p-3 rounded-xl bg-primary/10 border border-primary/20 text-primary">
             <LibraryBooksIcon />
           </div>
           <div>
@@ -120,7 +120,7 @@ const AdminDashboard = () => {
           </div>
         </Card>
 
-        <Card className="p-5 flex items-center gap-4">
+        <Card className="p-6 flex items-center gap-4">
           <div className="p-3 rounded-xl bg-accent-gold/10 border border-accent-gold/20 text-accent-gold">
             <LayersIcon />
           </div>
@@ -130,7 +130,7 @@ const AdminDashboard = () => {
           </div>
         </Card>
 
-        <Card className="p-5 flex items-center gap-4">
+        <Card className="p-6 flex items-center gap-4">
           <div className="p-3 rounded-xl bg-accent-green/10 border border-accent-green/20 text-accent-green">
             <CloudDoneIcon />
           </div>

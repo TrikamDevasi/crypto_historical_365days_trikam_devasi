@@ -8,11 +8,11 @@ import Card from '../common/Card';
 const CountUp = reactCountUp.default || reactCountUp;
 
 const colors = {
-  cyan: { hex: '#00d4ff', bg: 'bg-accent-cyan/10', border: 'border-accent-cyan/20' },
+  cyan: { hex: '#00d4ff', bg: 'bg-primary/10', border: 'border-primary/20' },
   green: { hex: '#00ff88', bg: 'bg-accent-green/10', border: 'border-accent-green/20' },
   red: { hex: '#ff3366', bg: 'bg-accent-red/10', border: 'border-accent-red/20' },
   gold: { hex: '#ffd700', bg: 'bg-accent-gold/10', border: 'border-accent-gold/20' },
-  purple: { hex: '#8b5cf6', bg: 'bg-accent-purple/10', border: 'border-accent-purple/20' },
+  purple: { hex: '#8b5cf6', bg: 'bg-accent/10', border: 'border-accent/20' },
 };
 
 const StatsCard = ({
@@ -34,11 +34,14 @@ const StatsCard = ({
   const chartData = sparklineData ? sparklineData.map((val, idx) => ({ id: idx, value: val })) : [];
 
   return (
-    <Card className="p-5 flex flex-col justify-between h-full relative overflow-hidden" hover3d>
-      <div className="flex items-start justify-between">
+    <div className="glass p-6 flex flex-col justify-between h-full relative overflow-hidden group">
+      {/* Animated gradient border on hover */}
+      <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl" />
+      
+      <div className="flex items-start justify-between relative z-10">
         <div>
-          <span className="text-xs font-semibold text-white/40 uppercase tracking-wider">{title}</span>
-          <h3 ref={ref} className="text-2xl font-bold font-mono text-white mt-1">
+          <span className="text-xs font-semibold text-text-muted uppercase tracking-wider font-sans">{title}</span>
+          <h3 ref={ref} className="text-2xl font-bold font-mono text-text-main mt-1 tracking-tight">
             {prefix}
             {inView ? (
               <CountUp end={value || 0} duration={1.5} decimals={decimals} separator="," />
@@ -48,9 +51,9 @@ const StatsCard = ({
             {suffix}
           </h3>
           {trend !== undefined && (
-            <div className={`flex items-center gap-1 mt-1 text-xs ${trend === 'up' ? 'text-accent-green' : 'text-accent-red'}`}>
+            <div className={`flex items-center gap-1 mt-1.5 text-xs ${trend === 'up' ? 'text-accent-green' : 'text-accent-red'}`}>
               {trend === 'up' ? <TrendingUpIcon sx={{ fontSize: 14 }} /> : <TrendingDownIcon sx={{ fontSize: 14 }} />}
-              <span className="font-mono">{trendValue}</span>
+              <span className="font-mono font-medium">{trendValue}</span>
             </div>
           )}
         </div>
@@ -58,7 +61,7 @@ const StatsCard = ({
         {Icon && (
           <motion.div
             whileHover={{ scale: 1.1, rotate: 5 }}
-            className={`p-3 rounded-xl border ${themeColor.bg} ${themeColor.border}`}
+            className={`p-3 rounded-xl border ${themeColor.bg} ${themeColor.border} shadow-sm group-hover:shadow-[0_0_15px_rgba(255,255,255,0.1)] transition-shadow duration-300`}
           >
             <Icon sx={{ fontSize: 22, color: themeColor.hex }} />
           </motion.div>
@@ -89,7 +92,7 @@ const StatsCard = ({
           </ResponsiveContainer>
         </div>
       )}
-    </Card>
+    </div>
   );
 };
 

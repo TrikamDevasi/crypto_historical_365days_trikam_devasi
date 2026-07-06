@@ -112,7 +112,7 @@ const CoinForm = () => {
         <span>Cancel and return</span>
       </Link>
 
-      <Card className="p-8 border-t-[3px] border-accent-cyan shadow-neon-cyan/5">
+      <Card className="p-8 border-t-[3px] border-primary shadow-neon-primary/5">
         <div className="mb-6">
           <h2 className="font-heading font-bold text-xl text-white tracking-tight">
             {isEditMode ? 'Modify Token Registry' : 'Register New Asset'}
@@ -223,7 +223,7 @@ const CoinForm = () => {
                 placeholder="Specify technological utility and consensus mechanisms..."
                 value={formik.values.description}
                 onChange={formik.handleChange}
-                className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-white/5 border border-white/5 focus:border-accent-cyan/40 focus:bg-white/10 outline-none text-xs text-white placeholder-white/30 transition-all font-sans resize-y"
+                className="w-full pl-9 pr-4 py-2.5 rounded-xl bg-white/5 border border-white/5 focus:border-primary/40 focus:bg-white/10 outline-none text-xs text-white placeholder-white/30 transition-all font-sans resize-y"
               />
             </div>
             {formik.touched.description && formik.errors.description && (

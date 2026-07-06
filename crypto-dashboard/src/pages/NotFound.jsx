@@ -8,8 +8,8 @@ const NotFound = () => {
     <div className="min-h-screen bg-bg-primary text-white flex flex-col items-center justify-center relative p-6 font-sans">
       <ParticleBackground />
 
-      <div className="absolute top-40 w-96 h-96 rounded-full bg-accent-purple/5 blur-[100px] pointer-events-none" />
-      <div className="absolute bottom-40 w-96 h-96 rounded-full bg-accent-cyan/5 blur-[100px] pointer-events-none" />
+      <div className="absolute top-40 w-96 h-96 rounded-full bg-accent/5 blur-[100px] pointer-events-none" />
+      <div className="absolute bottom-40 w-96 h-96 rounded-full bg-primary/5 blur-[100px] pointer-events-none" />
 
       <div className="max-w-md w-full text-center space-y-6 z-10">
         <div className="flex justify-center">

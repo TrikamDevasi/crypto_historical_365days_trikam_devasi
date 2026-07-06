@@ -5,9 +5,9 @@ const COLORS = ['#00d4ff', '#8b5cf6', '#ffd700', '#00ff88', '#ff3366'];
 const CustomTooltip = ({ active, payload, valueFormatter }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-bg-tertiary/90 backdrop-blur-md border border-white/10 p-3 rounded-lg shadow-neon-purple text-xs space-y-1">
+      <div className="bg-bg-tertiary/90 backdrop-blur-md border border-white/10 p-3 rounded-lg shadow-neon-primary text-xs space-y-1">
         <p className="text-white/60 font-medium">{payload[0].name}</p>
-        <p className="text-accent-cyan font-bold font-mono">
+        <p className="text-primary font-bold font-mono">
           {valueFormatter ? valueFormatter(payload[0].value) : payload[0].value}
         </p>
       </div>

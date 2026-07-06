@@ -3,9 +3,9 @@ import { ResponsiveContainer, BarChart as RechartsBarChart, Bar, XAxis, YAxis, C
 const CustomTooltip = ({ active, payload, label, valueFormatter }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-bg-tertiary/90 backdrop-blur-md border border-white/10 p-3 rounded-lg shadow-neon-purple text-xs space-y-1">
+      <div className="bg-bg-tertiary/90 backdrop-blur-md border border-white/10 p-3 rounded-lg shadow-neon-primary text-xs space-y-1">
         <p className="text-white/60 font-medium">{label}</p>
-        <p className="text-accent-purple font-bold font-mono">
+        <p className="text-accent font-bold font-mono">
           {valueFormatter ? valueFormatter(payload[0].value) : payload[0].value}
         </p>
       </div>

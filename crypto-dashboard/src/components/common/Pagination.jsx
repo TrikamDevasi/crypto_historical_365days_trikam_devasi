@@ -19,7 +19,7 @@ const Pagination = ({ page, totalPages, onPageChange, limit, onLimitChange }) =>
         <select
           value={limit}
           onChange={(e) => onLimitChange?.(Number(e.target.value))}
-          className="bg-white/5 border border-white/10 rounded px-2 py-1 text-xs text-white/70 focus:outline-none focus:border-accent-cyan"
+          className="bg-white/5 border border-white/10 rounded px-2 py-1 text-xs text-white/70 focus:outline-none focus:border-primary"
         >
           {[10, 20, 50, 100].map((l) => (
             <option key={l} value={l} className="bg-bg-secondary">{l}</option>
@@ -31,7 +31,7 @@ const Pagination = ({ page, totalPages, onPageChange, limit, onLimitChange }) =>
         <button
           onClick={() => onPageChange(page - 1)}
           disabled={page <= 1}
-          className="p-1 rounded text-white/40 hover:text-accent-cyan hover:bg-white/5 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+          className="p-1 rounded text-white/40 hover:text-primary hover:bg-white/5 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
         >
           <ChevronLeftIcon fontSize="small" />
         </button>
@@ -43,7 +43,7 @@ const Pagination = ({ page, totalPages, onPageChange, limit, onLimitChange }) =>
             className={`
               min-w-[28px] h-7 rounded text-xs font-medium transition-all
               ${p === page
-                ? 'bg-accent-cyan/20 text-accent-cyan border border-accent-cyan/30'
+                ? 'bg-primary/20 text-primary border border-primary/30'
                 : 'text-white/40 hover:text-white hover:bg-white/5'
               }
             `}
@@ -55,7 +55,7 @@ const Pagination = ({ page, totalPages, onPageChange, limit, onLimitChange }) =>
         <button
           onClick={() => onPageChange(page + 1)}
           disabled={page >= totalPages}
-          className="p-1 rounded text-white/40 hover:text-accent-cyan hover:bg-white/5 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+          className="p-1 rounded text-white/40 hover:text-primary hover:bg-white/5 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
         >
           <ChevronRightIcon fontSize="small" />
         </button>

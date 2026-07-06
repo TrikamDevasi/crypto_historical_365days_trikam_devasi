@@ -10,17 +10,17 @@ const Table = ({ columns, data, onRowClick, emptyMessage = 'No data available' }
   }
 
   return (
-    <div className="overflow-x-auto no-scrollbar">
-      <table className="w-full">
+    <div className="overflow-x-auto no-scrollbar w-full">
+      <table className="w-full text-left border-collapse">
         <thead>
-          <tr className="border-b border-white/[0.06]">
+          <tr className="border-b border-white/[0.06] bg-white/[0.02]">
             {columns.map((col) => (
               <th
                 key={col.key}
-                className="px-4 py-3 text-left text-xs font-medium text-white/40 uppercase tracking-wider bg-accent-cyan/[0.03]"
+                className="px-5 py-4 text-xs font-semibold text-text-muted uppercase tracking-wider font-sans"
                 style={{ width: col.width }}
               >
-                {col.label}
+                {col.header}
               </th>
             ))}
           </tr>
@@ -29,18 +29,18 @@ const Table = ({ columns, data, onRowClick, emptyMessage = 'No data available' }
           {data.map((row, index) => (
             <motion.tr
               key={row._id || index}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.03, duration: 0.3 }}
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.04, duration: 0.3 }}
               onClick={() => onRowClick?.(row)}
               className={`
-                border-b border-white/[0.04] transition-all duration-200
-                hover:bg-accent-cyan/[0.03] hover:border-l-2 hover:border-l-accent-cyan
+                border-b border-white/[0.04] transition-all duration-300
+                hover:bg-white/[0.03] hover:shadow-[inset_2px_0_0_0_#22d3ee]
                 ${onRowClick ? 'cursor-pointer' : ''}
               `}
             >
               {columns.map((col) => (
-                <td key={col.key} className="px-4 py-3 text-sm text-white/80">
+                <td key={col.key} className="px-5 py-4 text-sm text-text-main font-sans">
                   {col.render ? col.render(row[col.key], row, index) : row[col.key]}
                 </td>
               ))}

@@ -17,29 +17,37 @@ const darkTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#00d4ff', // cyan
+      main: '#00F0FF', // Dark mode primary cyan
     },
     secondary: {
-      main: '#8b5cf6', // purple
+      main: '#8A2BE2', // Accent indigo
     },
     background: {
-      default: '#0a0a0f',
-      paper: '#0d0d14',
+      default: '#0B0E14',
+      paper: '#151A23',
     },
     text: {
-      primary: '#ffffff',
-      secondary: 'rgba(255, 255, 255, 0.7)',
+      primary: '#f0f0fa',
+      secondary: '#9CA3AF',
     },
   },
   typography: {
-    fontFamily: "'Inter', 'sans-serif'",
+    fontFamily: "'Inter', sans-serif",
+    h1: { fontFamily: "'Outfit', sans-serif", fontWeight: 700 },
+    h2: { fontFamily: "'Outfit', sans-serif", fontWeight: 700 },
+    h3: { fontFamily: "'Outfit', sans-serif", fontWeight: 600 },
+    h4: { fontFamily: "'Outfit', sans-serif", fontWeight: 600 },
+    h5: { fontFamily: "'Outfit', sans-serif", fontWeight: 600 },
+    h6: { fontFamily: "'Outfit', sans-serif", fontWeight: 600 },
   },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
           textTransform: 'none',
-          borderRadius: '12px',
+          borderRadius: '8px',
+          fontFamily: "'Inter', sans-serif",
+          fontWeight: 500,
         },
       },
     },
@@ -47,8 +55,9 @@ const darkTheme = createTheme({
       styleOverrides: {
         root: {
           backgroundImage: 'none',
-          backgroundColor: '#0d0d14',
-          border: '1px solid rgba(255, 255, 255, 0.05)',
+          backgroundColor: '#151A23',
+          border: '1px solid rgba(0, 240, 255, 0.06)',
+          borderRadius: '16px',
         },
       },
     },

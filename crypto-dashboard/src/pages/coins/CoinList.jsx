@@ -76,14 +76,14 @@ const CoinList = () => {
     {
       header: 'Rank',
       key: 'rank',
-      render: (val) => <span className="font-mono font-bold text-xs text-accent-purple">#{val || '--'}</span>,
+      render: (val) => <span className="font-mono font-bold text-xs text-accent">#{val || '--'}</span>,
     },
     {
       header: 'Token Name',
       key: 'name',
       render: (val, row) => (
         <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center font-bold text-xs font-mono text-accent-cyan">
+          <div className="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center font-bold text-xs font-mono text-primary">
             {row.symbol?.toUpperCase().substring(0, 3)}
           </div>
           <div>
@@ -128,7 +128,7 @@ const CoinList = () => {
         <div className="flex gap-1">
           <button
             onClick={(e) => handleView(row._id, e)}
-            className="p-1.5 rounded-lg bg-white/5 border border-white/5 hover:bg-accent-cyan/10 hover:border-accent-cyan/20 hover:text-accent-cyan transition-all text-white/40"
+            className="p-1.5 rounded-lg bg-white/5 border border-white/5 hover:bg-primary/10 hover:border-primary/20 hover:text-primary transition-all text-white/40"
             title="View Details"
           >
             <VisibilityIcon sx={{ fontSize: 14 }} />

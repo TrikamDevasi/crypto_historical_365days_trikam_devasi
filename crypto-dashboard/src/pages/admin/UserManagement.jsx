@@ -45,7 +45,7 @@ const UserManagement = () => {
       key: 'name',
       render: (val, row) => (
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-accent-cyan to-accent-purple p-[1px]">
+          <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-primary to-accent p-[1px]">
             <div className="w-full h-full rounded-full bg-bg-secondary flex items-center justify-center text-white text-xs font-bold font-sans">
               {val?.charAt(0).toUpperCase()}
             </div>
@@ -95,7 +95,7 @@ const UserManagement = () => {
     <div className="space-y-6">
       {/* Title */}
       <div className="flex items-center gap-2">
-        <GroupIcon className="text-accent-cyan w-6 h-6 shadow-neon-cyan/20" />
+        <GroupIcon className="text-primary w-6 h-6 shadow-neon-primary/20" />
         <div>
           <h2 className="font-heading font-bold text-lg text-white">Operator Registry</h2>
           <p className="text-xxs text-white/40 font-sans">Audit and manage client terminals and security clearings</p>

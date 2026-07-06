@@ -23,7 +23,7 @@ const Settings = () => {
     <div className="space-y-6 max-w-4xl">
       {/* Title */}
       <div className="flex items-center gap-2">
-        <SettingsIcon className="text-accent-cyan w-6 h-6 shadow-neon-cyan/20" />
+        <SettingsIcon className="text-primary w-6 h-6 shadow-neon-primary/20" />
         <div>
           <h2 className="font-heading font-bold text-lg text-white">System Settings</h2>
           <p className="text-xxs text-white/40 font-sans">Configure client terminal and connection specifications</p>
@@ -33,7 +33,7 @@ const Settings = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Card 1: Terminal Visuals */}
         <Card className="p-6 space-y-4">
-          <div className="flex items-center gap-2 text-accent-cyan">
+          <div className="flex items-center gap-2 text-primary">
             <SecurityIcon sx={{ fontSize: 18 }} />
             <h4 className="font-heading font-bold text-xs uppercase tracking-wider text-white">Terminal Specification</h4>
           </div>
@@ -64,7 +64,7 @@ const Settings = () => {
 
         {/* Card 2: Network Sync */}
         <Card className="p-6 space-y-4">
-          <div className="flex items-center gap-2 text-accent-purple">
+          <div className="flex items-center gap-2 text-accent">
             <SpeedIcon sx={{ fontSize: 18 }} />
             <h4 className="font-heading font-bold text-xs uppercase tracking-wider text-white">Network Sync</h4>
           </div>
@@ -87,7 +87,7 @@ const Settings = () => {
                 <span className="font-semibold text-white block">Node Logging</span>
                 <span className="text-xxs text-white/40 block mt-0.5 font-sans">Trace and pipe network calls to terminal console</span>
               </div>
-              <input type="checkbox" defaultChecked className="accent-accent-purple rounded bg-white/5 border-white/10" />
+              <input type="checkbox" defaultChecked className="accent-accent rounded bg-white/5 border-white/10" />
             </div>
           </div>
         </Card>

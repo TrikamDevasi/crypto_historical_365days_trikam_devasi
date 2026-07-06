@@ -35,7 +35,7 @@ const GlowCard = ({ children, color = 'cyan', className = '' }) => {
       onMouseMove={handleMouseMove}
       whileHover={{ scale: 1.02 }}
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-      className={`relative glass-card-static p-5 overflow-hidden group ${className}`}
+      className={`relative glass-card-static p-6 overflow-hidden group ${className}`}
       style={{
         '--glow-color': glowColors[color],
         '--border-color': borderColors[color],

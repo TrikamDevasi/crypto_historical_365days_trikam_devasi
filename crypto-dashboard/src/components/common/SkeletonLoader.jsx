@@ -1,7 +1,7 @@
 const SkeletonLoader = ({ rows = 5, columns = 4, type = 'table' }) => {
   if (type === 'card') {
     return (
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {Array.from({ length: rows }).map((_, i) => (
           <div key={i} className="skeleton h-[40px] w-full" />
         ))}

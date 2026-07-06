@@ -2,8 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import useCoins from '../../hooks/useCoins';
-import { fetchMarketCap, fetchCoinCount, fetchMarketSummary } from '../../features/stats/statsSlice';
-import { fetchMarketTrend } from '../../features/insights/insightsSlice';
+import { fetchMarketCap, fetchCoinCount, fetchMarketSummary, fetchDailyAnalysis } from '../../features/stats/statsSlice';
 import StatsCard from '../../components/charts/StatsCard';
 import LineChart from '../../components/charts/LineChart';
 import Table from '../../components/common/Table';
@@ -29,8 +28,8 @@ const Dashboard = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { coins, isLoading: coinsLoading, error: coinsError, fetchCoins, fetchTrending } = useCoins();
-  const { marketCap, coinCount, isLoading: statsLoading } = useSelector((state) => state.stats);
-  const { marketTrend, isLoading: trendLoading } = useSelector((state) => state.insights);
+  const { marketCap, coinCount, dailyAnalysis, isLoading: statsLoading } = useSelector((state) => state.stats);
+  const { isLoading: trendLoading } = useSelector((state) => state.insights);
 
   useEffect(() => {
     // Dispatch all dashboard analytics
@@ -39,7 +38,7 @@ const Dashboard = () => {
     dispatch(fetchMarketCap());
     dispatch(fetchCoinCount());
     dispatch(fetchMarketSummary());
-    dispatch(fetchMarketTrend());
+    dispatch(fetchDailyAnalysis());
   }, [dispatch, fetchCoins, fetchTrending]);
 
   const handleRowClick = (row) => {
@@ -57,9 +56,9 @@ const Dashboard = () => {
     return <ErrorState message={error} onRetry={() => navigate(0)} />;
   }
 
-  // Map market trend data for charting
-  const chartData = marketTrend && marketTrend.length > 0 
-    ? marketTrend.map(t => ({ name: new Date(t.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }), value: t.averagePrice }))
+  // Map market daily analysis data for charting
+  const chartData = dailyAnalysis && dailyAnalysis.length > 0 
+    ? [...dailyAnalysis].reverse().map(t => ({ name: new Date(t.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' }), value: t.avgPrice }))
     : [
         { name: 'Day 1', value: 42000 },
         { name: 'Day 2', value: 43500 },
@@ -81,7 +80,7 @@ const Dashboard = () => {
       key: 'name',
       render: (val, row) => (
         <div className="flex items-center gap-2.5">
-          <div className="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center font-bold text-xs font-mono text-accent-cyan">
+          <div className="w-7 h-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center font-bold text-xs font-mono text-primary">
             {row.symbol?.toUpperCase().substring(0, 3)}
           </div>
           <div>
@@ -128,9 +127,9 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-fade-in">
       {/* Upper Metrics Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 animate-fade-up" style={{ animationDelay: '0.1s' }}>
         <StatsCard
           title="Total Market Cap"
           value={marketCap?.totalMarketCap || 1240000000}
@@ -175,30 +174,30 @@ const Dashboard = () => {
       </div>
 
       {/* Main Row: 3D Globe Globe and Performance Chart */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 animate-fade-up" style={{ animationDelay: '0.2s' }}>
         {/* Globe Column */}
-        <div className="lg:col-span-4 bg-bg-secondary/40 backdrop-blur-md border border-white/5 p-6 rounded-2xl flex flex-col items-center justify-center relative overflow-hidden h-[360px]">
-          <div className="absolute top-4 left-4">
+        <div className="lg:col-span-4 glass-panel p-6 flex flex-col items-center justify-center relative overflow-hidden h-[360px] group">
+          <div className="absolute top-4 left-4 z-10">
             <h3 className="font-heading font-bold text-sm text-white">Global Nodes</h3>
             <p className="text-xxs text-white/40">Market network operations</p>
           </div>
           <CryptoGlobe size={200} />
           <div className="text-center mt-3 z-10">
-            <span className="text-xxs bg-accent-cyan/15 text-accent-cyan border border-accent-cyan/20 px-2 py-0.5 rounded-full font-mono">
+            <span className="text-xxs bg-primary/15 text-primary border border-primary/20 px-2 py-0.5 rounded-full font-mono">
               Live Feed Connected
             </span>
           </div>
         </div>
 
         {/* Chart Column */}
-        <div className="lg:col-span-8 bg-bg-secondary/40 backdrop-blur-md border border-white/5 p-6 rounded-2xl h-[360px] flex flex-col justify-between">
+        <div className="lg:col-span-8 glass-panel p-6 h-[360px] flex flex-col justify-between">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="font-heading font-bold text-sm text-white font-sans">Market Aggregate Price</h3>
               <p className="text-xxs text-white/40 font-sans">7-day moving average index</p>
             </div>
             <div className="flex items-center gap-1.5 bg-white/5 p-1 rounded-lg border border-white/5">
-              <button className="text-xxs px-2.5 py-1 rounded bg-accent-cyan/20 text-accent-cyan border border-accent-cyan/30 font-semibold font-sans">7D</button>
+              <button className="text-xxs px-2.5 py-1 rounded bg-primary/20 text-primary border border-primary/30 font-semibold font-sans">7D</button>
               <button className="text-xxs px-2.5 py-1 rounded text-white/50 hover:text-white font-medium font-sans">30D</button>
             </div>
           </div>
@@ -215,7 +214,7 @@ const Dashboard = () => {
       </div>
 
       {/* Asset Table Preview */}
-      <div className="bg-bg-secondary/40 backdrop-blur-md border border-white/5 p-6 rounded-2xl space-y-4">
+      <div className="glass-panel p-6 space-y-4 animate-fade-up" style={{ animationDelay: '0.3s' }}>
         <div className="flex items-center justify-between">
           <div>
             <h3 className="font-heading font-bold text-sm text-white">Monitored Assets</h3>

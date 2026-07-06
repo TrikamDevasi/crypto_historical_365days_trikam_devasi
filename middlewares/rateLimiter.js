@@ -1,8 +1,11 @@
 const rateLimit = require('express-rate-limit');
 
+// Helper to determine if we are in development mode to bypass/relax rate limiting
+const isDevelopment = process.env.NODE_ENV === 'development';
+
 const generalLimiter = rateLimit({
   windowMs: 60 * 1000, // 60 seconds
-  max: 100,
+  max: isDevelopment ? 10000 : 100,
   message: {
     success: false,
     message: 'Too many requests from this IP. Please try again after 60 seconds.'
@@ -13,7 +16,7 @@ const generalLimiter = rateLimit({
 
 const authLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 10,
+  max: isDevelopment ? 1000 : 10,
   message: {
     success: false,
     message: 'Too many login or registration attempts. Please try again after 15 minutes.'
@@ -24,7 +27,7 @@ const authLimiter = rateLimit({
 
 const strictLimiter = rateLimit({
   windowMs: 60 * 1000, // 60 seconds
-  max: 20,
+  max: isDevelopment ? 1000 : 20,
   message: {
     success: false,
     message: 'Too many requests to this resource. Please try again after 60 seconds.'
@@ -35,7 +38,7 @@ const strictLimiter = rateLimit({
 
 const exportLimiter = rateLimit({
   windowMs: 60 * 1000, // 60 seconds
-  max: 5,
+  max: isDevelopment ? 500 : 5,
   message: {
     success: false,
     message: 'Too many export or download requests. Please try again after 60 seconds.'

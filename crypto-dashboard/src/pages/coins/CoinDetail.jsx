@@ -114,7 +114,7 @@ const CoinDetail = () => {
       {/* Header Info Panel */}
       <div className="bg-bg-secondary/40 backdrop-blur-md border border-white/5 p-6 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div className="flex items-center gap-4">
-          <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center font-bold text-lg font-mono text-accent-cyan shadow-neon-cyan/5 shadow-md">
+          <div className="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center font-bold text-lg font-mono text-primary shadow-neon-primary/5 shadow-md">
             {currentCoin.symbol?.toUpperCase().substring(0, 3)}
           </div>
           <div>
@@ -127,7 +127,7 @@ const CoinDetail = () => {
         </div>
 
         <div className="flex flex-col md:items-end">
-          <div className="text-3xl font-mono font-bold text-white tracking-tight drop-shadow-neon-cyan">
+          <div className="text-3xl font-mono font-bold text-white tracking-tight drop-shadow-neon-primary">
             {formatCurrency(currentCoin.price, 2)}
           </div>
           <div className={`flex items-center gap-1 font-mono text-xs mt-1 ${isUp ? 'text-accent-green' : 'text-accent-red'}`}>
@@ -138,7 +138,7 @@ const CoinDetail = () => {
       </div>
 
       {/* Main Charts & Metadata Split */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Price History Line Graph */}
         <div className="lg:col-span-8 bg-bg-secondary/40 backdrop-blur-md border border-white/5 p-6 rounded-2xl flex flex-col justify-between h-[400px]">
           <div>
@@ -176,7 +176,7 @@ const CoinDetail = () => {
               </div>
               <div className="flex justify-between items-center text-xs pt-3.5">
                 <span className="text-white/40 font-sans">Current Audit Rank</span>
-                <span className="font-mono text-accent-cyan font-bold">#{currentCoin.rank || 'N/A'}</span>
+                <span className="font-mono text-primary font-bold">#{currentCoin.rank || 'N/A'}</span>
               </div>
             </div>
           </Card>

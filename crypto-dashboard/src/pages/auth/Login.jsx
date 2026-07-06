@@ -2,7 +2,6 @@ import { useFormik } from 'formik';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import useAuth from '../../hooks/useAuth';
 import { loginSchema } from '../../utils/validators';
-import Card from '../../components/common/Card';
 import Input from '../../components/common/Input';
 import Button from '../../components/common/Button';
 import { showSuccess, showError } from '../../utils/toast';
@@ -21,18 +20,14 @@ const Login = () => {
 
   const handleDemoLogin = async () => {
     try {
-      const result = await handleLogin({
+      await handleLogin({
         email: 'user@example.com',
         password: 'user123',
       });
-      if (result.success) {
-        showSuccess('Access granted. Welcome to terminal as operator!');
-        navigate(from, { replace: true });
-      } else {
-        showError(result.error || 'Authentication failed');
-      }
+      showSuccess('Access granted. Welcome to terminal as operator!');
+      navigate(from, { replace: true });
     } catch (err) {
-      showError('A connection error occurred. Please try again.');
+      showError(typeof err === 'string' ? err : 'A connection error occurred. Please try again.');
     }
   };
 
@@ -44,29 +39,29 @@ const Login = () => {
     validationSchema: loginSchema,
     onSubmit: async (values) => {
       try {
-        const result = await handleLogin(values);
-        if (result.success) {
-          showSuccess('Access granted. Welcome back!');
-          navigate(from, { replace: true });
-        } else {
-          showError(result.error || 'Authentication failed');
-        }
+        await handleLogin(values);
+        showSuccess('Access granted. Welcome back!');
+        navigate(from, { replace: true });
       } catch (err) {
-        showError('A connection error occurred. Please try again.');
+        showError(typeof err === 'string' ? err : 'Authentication failed. Please verify your credentials.');
       }
     },
   });
 
   return (
-    <Card className="p-8 border-t-[3px] border-accent-cyan shadow-neon-cyan/5 w-full">
-      <div className="text-center mb-6">
-        <h2 className="font-heading font-bold text-2xl text-white tracking-tight">System Login</h2>
-        <p className="font-sans text-xs text-white/40 mt-1">
+    <div className="glass-panel p-10 sm:p-12 border-t-[4px] border-primary shadow-neon-primary relative overflow-hidden w-full max-w-md mx-auto rounded-3xl">
+      {/* Background glow effects */}
+      <div className="absolute -top-20 -left-20 w-64 h-64 bg-primary/10 rounded-full blur-[80px] pointer-events-none" />
+      <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-accent/10 rounded-full blur-[80px] pointer-events-none" />
+
+      <div className="text-center mb-8 relative z-10">
+        <h2 className="font-heading font-bold text-3xl text-white tracking-tight drop-shadow-md">System Login</h2>
+        <p className="font-sans text-sm text-white/50 mt-2">
           Enter credentials to authenticate secure terminal session
         </p>
       </div>
 
-      <form onSubmit={formik.handleSubmit} className="space-y-4">
+      <form onSubmit={formik.handleSubmit} className="space-y-5 relative z-10">
         <Input
           label="Email Address"
           name="email"
@@ -91,39 +86,41 @@ const Login = () => {
           error={formik.touched.password && formik.errors.password}
         />
 
-        <div className="flex justify-end text-xxs mt-1">
-          <a href="#" className="text-accent-cyan hover:underline transition-all">
+        <div className="flex justify-end text-xs mt-1">
+          <a href="#" className="text-primary hover:text-primary-hover hover:underline transition-all">
             Forgot authorization key?
           </a>
         </div>
 
-        <Button
-          type="submit"
-          variant="primary"
-          className="w-full mt-4"
-          loading={loading}
-        >
-          Authenticate Signature
-        </Button>
+        <div className="pt-2 space-y-3">
+          <Button
+            type="submit"
+            variant="primary"
+            className="w-full py-3 text-base shadow-neon-primary/20"
+            loading={loading}
+          >
+            Authenticate Signature
+          </Button>
 
-        <Button
-          type="button"
-          variant="ghost"
-          className="w-full mt-2.5"
-          onClick={handleDemoLogin}
-          disabled={loading}
-        >
-          Quick Guest Access
-        </Button>
+          <Button
+            type="button"
+            variant="ghost"
+            className="w-full py-3 text-base"
+            onClick={handleDemoLogin}
+            disabled={loading}
+          >
+            Quick Guest Access
+          </Button>
+        </div>
       </form>
 
-      <div className="text-center mt-6 text-xs text-white/40">
+      <div className="text-center mt-8 text-sm text-white/50 relative z-10 border-t border-white/5 pt-6">
         Unauthorized operator?{' '}
-        <Link to="/register" className="text-accent-purple hover:text-accent-cyan font-semibold transition-colors">
+        <Link to="/register" className="text-accent hover:text-primary font-semibold transition-colors">
           Register new terminal
         </Link>
       </div>
-    </Card>
+    </div>
   );
 };
 

@@ -50,39 +50,39 @@ const Sidebar = () => {
 
   return (
     <aside
-      className={`fixed top-0 left-0 h-screen z-30 transition-all duration-300 bg-bg-secondary/65 backdrop-blur-xl border-r border-white/5 flex flex-col justify-between ${
+      className={`fixed top-0 left-0 h-screen z-30 transition-all duration-300 glass-panel border-y-0 border-l-0 rounded-none flex flex-col justify-between ${
         sidebarCollapsed ? 'w-20' : 'w-64'
       }`}
     >
+      <button
+        onClick={() => dispatch(toggleSidebar())}
+        className="absolute -right-3 top-5 w-6 h-6 rounded-full bg-bg-tertiary border border-border-em flex items-center justify-center text-text-muted hover:text-primary transition-colors z-50 cursor-pointer shadow-sm"
+      >
+        {sidebarCollapsed ? (
+          <ChevronRightIcon sx={{ fontSize: 16 }} />
+        ) : (
+          <ChevronRightIcon sx={{ fontSize: 16, transform: 'rotate(180deg)' }} />
+        )}
+      </button>
+
       <div>
         {/* Header/Logo */}
-        <div className="h-16 flex items-center justify-between px-4 border-b border-white/5">
+        <div className={`h-16 flex items-center ${sidebarCollapsed ? 'justify-center' : 'justify-start px-4'} border-b border-white/5`}>
           {!sidebarCollapsed && (
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-accent-cyan to-accent-purple flex items-center justify-center shadow-neon-cyan/30 shadow-md">
+              <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary to-accent flex items-center justify-center shadow-neon-primary/30 shadow-md">
                 <span className="font-sans font-bold text-white text-base">C</span>
               </div>
-              <span className="font-heading font-semibold text-sm bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent">
+              <span className="font-heading font-semibold text-sm bg-gradient-to-r from-text-main to-text-muted bg-clip-text text-transparent">
                 CryptoAnalytics
               </span>
             </div>
           )}
           {sidebarCollapsed && (
-            <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-accent-cyan to-accent-purple flex items-center justify-center mx-auto shadow-neon-cyan/30 shadow-md">
+            <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-primary to-accent flex items-center justify-center shadow-neon-primary/30 shadow-md">
               <span className="font-sans font-bold text-white text-base">C</span>
             </div>
           )}
-
-          <button
-            onClick={() => dispatch(toggleSidebar())}
-            className="p-1.5 rounded-lg bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-colors text-white/60 hover:text-white"
-          >
-            {sidebarCollapsed ? (
-              <ChevronRightIcon className="w-4 h-4" />
-            ) : (
-              <MenuOpenIcon className="w-4 h-4" />
-            )}
-          </button>
         </div>
 
         {/* Navigation Items */}
@@ -94,7 +94,7 @@ const Sidebar = () => {
               className={({ isActive }) =>
                 `flex items-center gap-3.5 px-3 py-2.5 rounded-xl border transition-all duration-200 group relative ${
                   isActive
-                    ? 'bg-gradient-to-r from-accent-cyan/10 to-accent-purple/10 border-accent-cyan/20 text-accent-cyan shadow-neon-cyan/5'
+                    ? 'bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20 text-primary shadow-neon-primary/5'
                     : 'bg-transparent border-transparent text-white/50 hover:text-white hover:bg-white/5'
                 }`
               }
@@ -103,9 +103,9 @@ const Sidebar = () => {
                 <>
                   {/* Left neon border pill */}
                   {isActive && (
-                    <span className="absolute left-0 top-1/4 bottom-1/4 w-1 rounded-r-md bg-gradient-to-b from-accent-cyan to-accent-purple shadow-neon-cyan shadow-sm" />
+                    <span className="absolute left-0 top-1/4 bottom-1/4 w-1 rounded-r-md bg-gradient-to-b from-primary to-accent shadow-neon-primary shadow-sm" />
                   )}
-                  {renderIcon(item.icon, isActive ? 'text-accent-cyan' : 'text-white/50 group-hover:text-white transition-colors')}
+                      {renderIcon(item.icon, isActive ? 'text-primary' : 'text-white/50 group-hover:text-primary transition-colors')}
                   {!sidebarCollapsed && <span className="font-sans font-medium text-sm">{item.label}</span>}
                 </>
               )}
@@ -127,7 +127,7 @@ const Sidebar = () => {
                   className={({ isActive }) =>
                     `flex items-center gap-3.5 px-3 py-2.5 rounded-xl border transition-all duration-200 group relative ${
                       isActive
-                        ? 'bg-gradient-to-r from-accent-cyan/10 to-accent-purple/10 border-accent-cyan/20 text-accent-cyan shadow-neon-cyan/5'
+                        ? 'bg-gradient-to-r from-primary/10 to-accent/10 border-primary/20 text-primary shadow-neon-primary/5'
                         : 'bg-transparent border-transparent text-white/50 hover:text-white hover:bg-white/5'
                     }`
                   }
@@ -135,9 +135,9 @@ const Sidebar = () => {
                   {({ isActive }) => (
                     <>
                       {isActive && (
-                        <span className="absolute left-0 top-1/4 bottom-1/4 w-1 rounded-r-md bg-gradient-to-b from-accent-cyan to-accent-purple shadow-neon-cyan shadow-sm" />
+                        <span className="absolute left-0 top-1/4 bottom-1/4 w-1 rounded-r-md bg-gradient-to-b from-primary to-accent shadow-neon-primary shadow-sm" />
                       )}
-                      {renderIcon(item.icon, isActive ? 'text-accent-cyan' : 'text-white/50 group-hover:text-white transition-colors')}
+                          {renderIcon(item.icon, isActive ? 'text-primary' : 'text-white/50 group-hover:text-primary transition-colors')}
                       {!sidebarCollapsed && <span className="font-sans font-medium text-sm">{item.label}</span>}
                     </>
                   )}
@@ -154,7 +154,7 @@ const Sidebar = () => {
           <div className="flex items-center justify-between gap-3">
             {!sidebarCollapsed && (
               <div className="flex items-center gap-3 overflow-hidden">
-                <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-accent-cyan to-accent-purple p-[1px]">
+                <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-primary to-accent p-[1px]">
                   <div className="w-full h-full rounded-full bg-bg-secondary flex items-center justify-center text-white text-xs font-bold font-sans">
                     {user?.name?.charAt(0).toUpperCase() || 'U'}
                   </div>
@@ -166,7 +166,7 @@ const Sidebar = () => {
               </div>
             )}
             {sidebarCollapsed && (
-              <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-accent-cyan to-accent-purple p-[1px] mx-auto">
+              <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-primary to-accent p-[1px] mx-auto">
                 <div className="w-full h-full rounded-full bg-bg-secondary flex items-center justify-center text-white text-xs font-bold font-sans">
                   {user?.name?.charAt(0).toUpperCase() || 'U'}
                 </div>

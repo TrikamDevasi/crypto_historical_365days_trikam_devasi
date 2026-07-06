@@ -71,7 +71,7 @@ const Profile = () => {
       {/* Left Column: Operator Badge */}
       <div className="lg:col-span-4 space-y-6">
         <Card className="p-6 text-center space-y-4">
-          <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-accent-cyan to-accent-purple p-[2px] mx-auto shadow-neon-cyan/20">
+          <div className="w-20 h-20 rounded-full bg-gradient-to-tr from-primary to-accent p-[2px] mx-auto shadow-neon-primary/20">
             <div className="w-full h-full rounded-full bg-bg-secondary flex items-center justify-center text-white text-2xl font-bold font-sans">
               {user?.name?.charAt(0).toUpperCase()}
             </div>

@@ -3,9 +3,9 @@ import { ResponsiveContainer, AreaChart, Area, XAxis, YAxis, CartesianGrid, Tool
 const CustomTooltip = ({ active, payload, label, valueFormatter }) => {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-bg-tertiary/90 backdrop-blur-md border border-white/10 p-3 rounded-lg shadow-neon-purple text-xs space-y-1">
+      <div className="bg-bg-tertiary/90 backdrop-blur-md border border-white/10 p-3 rounded-lg shadow-neon-primary text-xs space-y-1">
         <p className="text-white/60 font-medium">{label}</p>
-        <p className="text-accent-cyan font-bold font-mono">
+        <p className="text-primary font-bold font-mono">
           {valueFormatter ? valueFormatter(payload[0].value) : payload[0].value}
         </p>
       </div>
@@ -33,17 +33,17 @@ const LineChart = ({
               <stop offset="95%" stopColor={gradientColors[1]} stopOpacity={0.0} />
             </linearGradient>
           </defs>
-          <CartesianGrid strokeDasharray="3 3" stroke="rgba(255, 255, 255, 0.03)" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border-em)" vertical={false} />
           <XAxis
             dataKey={xAxisKey}
-            stroke="rgba(255, 255, 255, 0.3)"
+            stroke="var(--color-text-muted)"
             fontSize={10}
             tickLine={false}
             axisLine={false}
             dy={10}
           />
           <YAxis
-            stroke="rgba(255, 255, 255, 0.3)"
+            stroke="var(--color-text-muted)"
             fontSize={10}
             tickLine={false}
             axisLine={false}

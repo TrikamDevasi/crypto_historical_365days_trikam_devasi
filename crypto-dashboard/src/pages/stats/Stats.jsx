@@ -80,9 +80,9 @@ const Stats = () => {
     <div className="space-y-6">
       {/* Upper stats summary list */}
       {marketSummary && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          <Card className="p-5 flex items-center gap-4">
-            <div className="p-3 rounded-xl bg-accent-cyan/10 border border-accent-cyan/20 text-accent-cyan">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Card className="p-6 flex items-center gap-4">
+            <div className="p-3 rounded-xl bg-primary/10 border border-primary/20 text-primary">
               <FunctionsIcon />
             </div>
             <div>
@@ -93,8 +93,8 @@ const Stats = () => {
             </div>
           </Card>
 
-          <Card className="p-5 flex items-center gap-4">
-            <div className="p-3 rounded-xl bg-accent-purple/10 border border-accent-purple/20 text-accent-purple">
+          <Card className="p-6 flex items-center gap-4">
+            <div className="p-3 rounded-xl bg-accent/10 border border-accent/20 text-accent">
               <FunctionsIcon />
             </div>
             <div>
@@ -105,7 +105,7 @@ const Stats = () => {
             </div>
           </Card>
 
-          <Card className="p-5 flex items-center gap-4">
+          <Card className="p-6 flex items-center gap-4">
             <div className="p-3 rounded-xl bg-accent-green/10 border border-accent-green/20 text-accent-green">
               <AccountBalanceWalletIcon />
             </div>
@@ -117,7 +117,7 @@ const Stats = () => {
             </div>
           </Card>
 
-          <Card className="p-5 flex items-center gap-4">
+          <Card className="p-6 flex items-center gap-4">
             <div className="p-3 rounded-xl bg-accent-gold/10 border border-accent-gold/20 text-accent-gold">
               <BarChartIcon />
             </div>
@@ -132,7 +132,7 @@ const Stats = () => {
       )}
 
       {/* Main Charts Split */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Monthly analysis line chart */}
         <div className="lg:col-span-8 bg-bg-secondary/40 backdrop-blur-md border border-white/5 p-6 rounded-2xl flex flex-col justify-between h-[380px]">
           <div>

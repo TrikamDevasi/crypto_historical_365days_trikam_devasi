@@ -8,7 +8,7 @@ const useAuth = () => {
 
   const handleLogin = useCallback((credentials) => dispatch(login(credentials)).unwrap(), [dispatch]);
   const handleRegister = useCallback((userData) => dispatch(register(userData)).unwrap(), [dispatch]);
-  const handleLogout = useCallback(() => dispatch(logout()).unwrap(), [dispatch]);
+  const handleLogout = useCallback(() => dispatch(logout()), [dispatch]);
   const handleFetchProfile = useCallback(() => dispatch(fetchProfile()).unwrap(), [dispatch]);
   const handleUpdateProfile = useCallback((data) => dispatch(updateProfile(data)).unwrap(), [dispatch]);
   const handleChangePassword = useCallback((data) => dispatch(changePassword(data)).unwrap(), [dispatch]);
