@@ -45,7 +45,7 @@ const Dashboard = () => {
     navigate(`/coins/${row._id}`);
   };
 
-  const loading = (coinsLoading || statsLoading || trendLoading) && !coins.length;
+  const loading = (coinsLoading || statsLoading || trendLoading) && !(coins?.length);
   const error = coinsError;
 
   if (loading) {
@@ -153,7 +153,7 @@ const Dashboard = () => {
         />
         <StatsCard
           title="Monitored Tokens"
-          value={coinCount?.totalCoins || coins.length || 18}
+          value={coinCount?.totalCoins || coins?.length || 18}
           icon={LayersIcon}
           color="gold"
           trend="up"
