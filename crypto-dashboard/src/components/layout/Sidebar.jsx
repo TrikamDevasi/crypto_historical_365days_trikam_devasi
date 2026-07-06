@@ -150,39 +150,29 @@ const Sidebar = () => {
 
       {/* User profile footer */}
       {user && (
-        <div className="p-4 border-t border-white/5 bg-black/10">
-          <div className="flex items-center justify-between gap-3">
-            {!sidebarCollapsed && (
-              <div className="flex items-center gap-3 overflow-hidden">
-                <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-primary to-accent p-[1px]">
-                  <div className="w-full h-full rounded-full bg-bg-secondary flex items-center justify-center text-white text-xs font-bold font-sans">
-                    {user?.name?.charAt(0).toUpperCase() || 'U'}
-                  </div>
-                </div>
-                <div className="flex flex-col min-w-0">
-                  <span className="font-sans font-semibold text-xs text-white truncate">{user?.name}</span>
-                  <span className="font-sans text-xxs text-white/40 truncate capitalize">{user?.role}</span>
-                </div>
+        <div className="p-4 border-t border-white/5 bg-black/10 flex flex-col gap-3">
+          <div className="flex items-center gap-3 overflow-hidden">
+            <div className={`w-9 h-9 rounded-full bg-gradient-to-tr from-primary to-accent p-[1px] ${sidebarCollapsed ? 'mx-auto' : ''}`}>
+              <div className="w-full h-full rounded-full bg-bg-secondary flex items-center justify-center text-white text-xs font-bold font-sans">
+                {user?.name?.charAt(0).toUpperCase() || 'U'}
               </div>
-            )}
-            {sidebarCollapsed && (
-              <div className="w-9 h-9 rounded-full bg-gradient-to-tr from-primary to-accent p-[1px] mx-auto">
-                <div className="w-full h-full rounded-full bg-bg-secondary flex items-center justify-center text-white text-xs font-bold font-sans">
-                  {user?.name?.charAt(0).toUpperCase() || 'U'}
-                </div>
-              </div>
-            )}
-            
+            </div>
             {!sidebarCollapsed && (
-              <button
-                onClick={handleLogoutClick}
-                className="p-2 rounded-lg bg-white/5 border border-white/5 hover:bg-accent-red/10 hover:border-accent-red/20 transition-all text-white/50 hover:text-accent-red"
-                title="Logout"
-              >
-                <LogoutIcon className="w-4 h-4" />
-              </button>
+              <div className="flex flex-col min-w-0 flex-1">
+                <span className="font-sans font-semibold text-xs text-white truncate">{user?.name}</span>
+                <span className="font-sans text-xxs text-white/40 truncate capitalize">{user?.role}</span>
+              </div>
             )}
           </div>
+          
+          <button
+            onClick={handleLogoutClick}
+            className={`flex items-center justify-center gap-2 rounded-xl border transition-all text-accent-red border-accent-red/20 bg-accent-red/10 hover:bg-accent-red/20 hover:shadow-neon-red/20 w-full ${sidebarCollapsed ? 'p-2' : 'py-2.5 px-4'}`}
+            title="Logout"
+          >
+            <LogoutIcon className="w-5 h-5" />
+            {!sidebarCollapsed && <span className="font-sans font-bold text-sm">LOG OUT</span>}
+          </button>
         </div>
       )}
     </aside>
