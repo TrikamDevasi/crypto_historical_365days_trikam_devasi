@@ -95,9 +95,9 @@ const Navbar = () => {
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="flex items-center gap-2 pl-2 pr-1 py-1 rounded-full bg-white/5 border border-white/5 hover:bg-white/10 hover:border-white/10 transition-colors text-white/70 hover:text-white text-xs font-sans font-medium"
+                className="flex items-center gap-2 pl-2 pr-1 py-1 rounded-md bg-[#111111] border border-[#333333] hover:bg-[#222222] transition-colors text-[#EDEDED] text-xs font-sans font-medium"
               >
-                <div className="w-6 h-6 rounded-full bg-gradient-to-tr from-primary to-accent flex items-center justify-center text-white font-bold text-xxs">
+                <div className="w-6 h-6 rounded bg-[#0A0A0A] flex items-center justify-center text-white font-bold text-[10px]">
                   {user?.name?.charAt(0).toUpperCase()}
                 </div>
                 <span className="hidden sm:inline-block max-w-[100px] truncate">{user?.name}</span>
@@ -129,11 +129,11 @@ const Navbar = () => {
             {/* Explicit Logout Button */}
             <button
               onClick={handleLogoutClick}
-              className="flex items-center gap-2 ml-1 px-3 py-1.5 rounded-full bg-accent-red/10 border border-accent-red/20 hover:bg-accent-red/20 text-accent-red hover:shadow-neon-red/30 transition-all text-xs font-semibold"
+              className="flex items-center gap-1.5 ml-2 px-3 py-1.5 rounded-md bg-transparent border border-transparent hover:bg-[#EF4444]/10 text-[#888888] hover:text-[#EF4444] transition-all text-xs font-medium font-sans"
               title="Logout"
             >
               <LogoutIcon className="w-4 h-4" />
-              <span className="hidden sm:inline-block">Log Out</span>
+              <span className="hidden sm:inline-block">Logout</span>
             </button>
           </div>
         )}

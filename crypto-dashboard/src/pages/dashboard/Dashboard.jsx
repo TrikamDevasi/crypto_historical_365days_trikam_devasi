@@ -9,6 +9,8 @@ import Table from '../../components/common/Table';
 import Badge from '../../components/common/Badge';
 import Loader from '../../components/common/Loader';
 import ErrorState from '../../components/common/ErrorState';
+import TopMovers from '../../components/dashboard/TopMovers';
+import DashboardSkeleton from '../../components/dashboard/DashboardSkeleton';
 import { formatCurrency, formatPercent, formatCompactNumber } from '../../utils/formatters';
 
 // MUI Icons
@@ -48,7 +50,7 @@ const Dashboard = () => {
   const error = coinsError;
 
   if (loading) {
-    return <Loader size="lg" text="Syncing real-time market streams..." />;
+    return <DashboardSkeleton />;
   }
 
   if (error) {
@@ -171,45 +173,20 @@ const Dashboard = () => {
       {/* Main Row: Top Movers and Performance Chart */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 animate-fade-up" style={{ animationDelay: '0.2s' }}>
         {/* Top Movers Column */}
-        <div className="lg:col-span-4 glass-panel p-5 flex flex-col h-[360px]">
-          <div className="mb-4">
-            <h3 className="text-[12px] font-semibold text-[#888888] uppercase tracking-widest font-sans">Top Movers</h3>
-            <p className="text-xs text-[#666666] font-sans mt-0.5">Highest 24h volume assets</p>
-          </div>
-          
-          <div className="flex-1 overflow-y-auto space-y-3 pr-2 custom-scrollbar">
-            {coins?.slice(0, 5).map((coin) => (
-              <div key={coin._id} className="flex items-center justify-between p-3 rounded-lg border border-[#333333] hover:bg-[#111111] transition-colors cursor-pointer" onClick={() => handleRowClick(coin)}>
-                <div className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-full bg-[#111111] border border-[#333333] flex items-center justify-center font-bold text-xs font-mono text-white">
-                    {coin.symbol?.toUpperCase().substring(0, 3)}
-                  </div>
-                  <div>
-                    <div className="font-semibold text-white text-sm">{coin.name}</div>
-                    <div className="text-xs text-[#888888] uppercase">{coin.symbol}</div>
-                  </div>
-                </div>
-                <div className="text-right">
-                  <div className="font-mono text-sm text-white">{formatCurrency(coin.price, 2)}</div>
-                  <div className={`text-xs font-mono font-medium ${coin.return_24h >= 0 ? 'text-[#10B981]' : 'text-[#EF4444]'}`}>
-                    {coin.return_24h >= 0 ? '+' : ''}{formatPercent(coin.return_24h)}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+        <div className="lg:col-span-4">
+          <TopMovers coins={coins} onRowClick={handleRowClick} />
         </div>
 
-        {/* Chart Column */}
+        {/* Performance Chart Column */}
         <div className="lg:col-span-8 glass-panel p-6 h-[360px] flex flex-col justify-between">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-[12px] font-semibold text-[#888888] uppercase tracking-widest font-sans">Market Aggregate Price</h3>
               <p className="text-xs text-[#666666] font-sans mt-0.5">7-day moving average index</p>
             </div>
-            <div className="flex items-center gap-1.5 bg-[#000000] p-1 rounded-lg border border-[#333333]">
-              <button className="text-xs px-3 py-1.5 rounded-md bg-[#333333] text-white font-medium font-sans transition-colors">7D</button>
-              <button className="text-xs px-3 py-1.5 rounded-md text-[#888888] hover:text-white font-medium font-sans transition-colors">30D</button>
+            <div className="flex items-center gap-1 bg-[#000000] p-1 rounded-lg border border-[#333333]">
+              <Button variant="ghost" className="active">7D</Button>
+              <Button variant="ghost">30D</Button>
             </div>
           </div>
           <div className="flex-1 min-h-[220px]">

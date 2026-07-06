@@ -106,6 +106,17 @@ body::before {
     background-color: var(--color-primary-light);
   }
 
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 bg-transparent text-text-muted font-sans text-sm font-medium px-3 py-1.5 rounded-md border border-transparent cursor-pointer transition-all duration-200 hover:text-white hover:bg-[#111111];
+  }
+  .btn-ghost.active {
+    @apply bg-[#333333] text-white;
+  }
+
+  .btn-danger {
+    @apply inline-flex items-center justify-center gap-2 bg-transparent text-red-500 font-sans text-sm font-medium px-4 py-2 rounded-lg border border-red-500/20 hover:bg-red-500/10 cursor-pointer transition-all duration-200;
+  }
+
   /* === INPUTS === */
   .input-field {
     @apply w-full bg-bg-primary border border-border-color rounded-lg text-text-main font-sans text-sm px-3 py-2 outline-none transition-all duration-200;
