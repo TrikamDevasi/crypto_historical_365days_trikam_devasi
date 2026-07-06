@@ -4,6 +4,8 @@ import { API_ENDPOINTS } from '../utils/constants';
 const authService = {
   login: (credentials) => api.post(API_ENDPOINTS.AUTH.LOGIN, credentials),
 
+  googleLogin: (credential) => api.post(API_ENDPOINTS.AUTH.GOOGLE_LOGIN, { credential }),
+
   register: (userData) => api.post(API_ENDPOINTS.AUTH.REGISTER, userData),
 
   logout: () => api.post(API_ENDPOINTS.AUTH.LOGOUT),

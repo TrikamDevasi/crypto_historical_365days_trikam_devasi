@@ -12,6 +12,17 @@ const login = asyncHandler(async (req, res) => {
   return sendSuccess(res, result, 'User logged in successfully', 200);
 });
 
+const googleLogin = asyncHandler(async (req, res) => {
+  const { credential } = req.body;
+  if (!credential) {
+    const error = new Error('Google credential is required');
+    error.statusCode = 400;
+    throw error;
+  }
+  const result = await authService.googleLogin(credential);
+  return sendSuccess(res, result, 'User logged in via Google successfully', 200);
+});
+
 const logout = asyncHandler(async (req, res) => {
   await authService.logoutUser(req.user._id);
   return sendSuccess(res, null, 'User logged out successfully', 200);
@@ -67,6 +78,7 @@ const verifyEmail = asyncHandler(async (req, res) => {
 module.exports = {
   register,
   login,
+  googleLogin,
   logout,
   getProfile,
   updateProfile,

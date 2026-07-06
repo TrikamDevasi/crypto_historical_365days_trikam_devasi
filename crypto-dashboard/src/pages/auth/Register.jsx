@@ -5,6 +5,7 @@ import { registerSchema } from '../../utils/validators';
 import Input from '../../components/common/Input';
 import Button from '../../components/common/Button';
 import { showSuccess, showError } from '../../utils/toast';
+import { GoogleLogin } from '@react-oauth/google';
 
 // MUI Icons
 import {
@@ -15,7 +16,7 @@ import {
 } from '@mui/icons-material';
 
 const Register = () => {
-  const { handleRegister, loading } = useAuth();
+  const { handleRegister, handleGoogleLogin, loading } = useAuth();
   const navigate = useNavigate();
 
   const formik = useFormik({
@@ -131,6 +132,32 @@ const Register = () => {
           >
             Register Terminal Signature
           </Button>
+
+          <div className="relative flex items-center py-2">
+            <div className="flex-grow border-t border-white/10"></div>
+            <span className="flex-shrink-0 mx-4 text-white/40 text-xs">OR CONTINUE WITH</span>
+            <div className="flex-grow border-t border-white/10"></div>
+          </div>
+
+          <div className="flex justify-center">
+            <GoogleLogin
+              onSuccess={async (credentialResponse) => {
+                try {
+                  await handleGoogleLogin(credentialResponse.credential);
+                  showSuccess('Access granted via Google. Welcome!');
+                  navigate('/dashboard');
+                } catch (err) {
+                  showError(typeof err === 'string' ? err : 'Google authentication failed.');
+                }
+              }}
+              onError={() => {
+                showError('Google Login Failed');
+              }}
+              theme="filled_black"
+              size="large"
+              shape="pill"
+            />
+          </div>
         </div>
       </form>
 

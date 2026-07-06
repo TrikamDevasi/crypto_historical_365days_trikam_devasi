@@ -271,9 +271,58 @@ const getAllUsers = async (query) => {
   return { data, total, page, limit };
 };
 
+const { OAuth2Client } = require('google-auth-library');
+
+const googleLogin = async (idToken) => {
+  const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
+  
+  try {
+    const ticket = await client.verifyIdToken({
+      idToken,
+      audience: process.env.GOOGLE_CLIENT_ID,
+    });
+    const payload = ticket.getPayload();
+    const { email, name, sub: googleId } = payload;
+
+    let user = await User.findOne({ email, isDeleted: false });
+
+    if (user) {
+      // User exists, if they don't have a googleId, maybe link it?
+      if (!user.googleId) {
+        user.googleId = googleId;
+        await user.save();
+      }
+    } else {
+      // Create new user
+      user = await User.create({
+        name,
+        email,
+        googleId,
+        isEmailVerified: true, // Google emails are already verified
+        role: 'user'
+      });
+    }
+
+    const tokens = generateTokens(user);
+    user.refreshToken = tokens.refreshToken;
+    await user.save();
+
+    const userObj = user.toObject();
+    delete userObj.password;
+    delete userObj.refreshToken;
+
+    return { user: userObj, ...tokens };
+  } catch (error) {
+    const err = new Error('Invalid Google token');
+    err.statusCode = 401;
+    throw err;
+  }
+};
+
 module.exports = {
   registerUser,
   loginUser,
+  googleLogin,
   logoutUser,
   getUserProfile,
   updateUserProfile,

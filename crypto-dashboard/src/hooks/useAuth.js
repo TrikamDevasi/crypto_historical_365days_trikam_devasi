@@ -1,12 +1,13 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { useCallback } from 'react';
-import { login, register, logout, fetchProfile, updateProfile, changePassword, clearError } from '../features/auth/authSlice';
+import { login, googleLogin, register, logout, fetchProfile, updateProfile, changePassword, clearError } from '../features/auth/authSlice';
 
 const useAuth = () => {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
 
   const handleLogin = useCallback((credentials) => dispatch(login(credentials)).unwrap(), [dispatch]);
+  const handleGoogleLogin = useCallback((credential) => dispatch(googleLogin(credential)).unwrap(), [dispatch]);
   const handleRegister = useCallback((userData) => dispatch(register(userData)).unwrap(), [dispatch]);
   const handleLogout = useCallback(() => dispatch(logout()), [dispatch]);
   const handleFetchProfile = useCallback(() => dispatch(fetchProfile()).unwrap(), [dispatch]);
@@ -18,6 +19,8 @@ const useAuth = () => {
     ...auth,
     login: handleLogin,
     handleLogin,
+    googleLogin: handleGoogleLogin,
+    handleGoogleLogin,
     register: handleRegister,
     handleRegister,
     logout: handleLogout,

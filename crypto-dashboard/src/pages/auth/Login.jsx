@@ -1,5 +1,6 @@
 import { useFormik } from 'formik';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { GoogleLogin } from '@react-oauth/google';
 import useAuth from '../../hooks/useAuth';
 import { loginSchema } from '../../utils/validators';
 import Input from '../../components/common/Input';
@@ -11,7 +12,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import LockIcon from '@mui/icons-material/Lock';
 
 const Login = () => {
-  const { handleLogin, loading } = useAuth();
+  const { handleLogin, handleGoogleLogin, loading } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -111,6 +112,32 @@ const Login = () => {
           >
             Quick Guest Access
           </Button>
+
+          <div className="relative flex items-center py-2">
+            <div className="flex-grow border-t border-white/10"></div>
+            <span className="flex-shrink-0 mx-4 text-white/40 text-xs">OR CONTINUE WITH</span>
+            <div className="flex-grow border-t border-white/10"></div>
+          </div>
+
+          <div className="flex justify-center">
+            <GoogleLogin
+              onSuccess={async (credentialResponse) => {
+                try {
+                  await handleGoogleLogin(credentialResponse.credential);
+                  showSuccess('Access granted via Google. Welcome!');
+                  navigate(from, { replace: true });
+                } catch (err) {
+                  showError(typeof err === 'string' ? err : 'Google authentication failed.');
+                }
+              }}
+              onError={() => {
+                showError('Google Login Failed');
+              }}
+              theme="filled_black"
+              size="large"
+              shape="pill"
+            />
+          </div>
         </div>
       </form>
 

@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 import { Provider, useDispatch } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -88,13 +89,15 @@ const AppContent = () => {
 const App = () => {
   return (
     <Provider store={store}>
-      <ThemeProvider theme={darkTheme}>
-        <CssBaseline />
-        <BrowserRouter>
-          <AppContent />
-          <ToastContainer theme="dark" position="bottom-right" />
-        </BrowserRouter>
-      </ThemeProvider>
+      <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID || 'your_google_client_id'}>
+        <ThemeProvider theme={darkTheme}>
+          <CssBaseline />
+          <BrowserRouter>
+            <AppContent />
+            <ToastContainer theme="dark" position="bottom-right" />
+          </BrowserRouter>
+        </ThemeProvider>
+      </GoogleOAuthProvider>
     </Provider>
   );
 };
